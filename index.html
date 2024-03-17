@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Editor de Cartões Online</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+  }
+  #card {
+    width: 300px;
+    height: 200px;
+    border: 2px solid #000;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px auto;
+  }
+  label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  input[type="text"] {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+</style>
+</head>
+<body>
+  <div class="container">
+    
+    <h1>Editor de Cartões</h1>
+    
+    <form id="editor">
+      <label for="corFundo">Cor de Fundo:</label>
+      <input type="color" id="corFundo" name="corFundo" value="#ffffff">
+      
+      <label for="corTexto">Cor do Texto:</label>
+      <input type="color" id="corTexto" name="corTexto" value="#000000">
+      
+      <label for="mensagem">Mensagem:</label>
+      <input type="text" id="mensagem" name="mensagem" placeholder="Digite sua mensagem...">
+      
+      <label for="imagem">Imagem de Fundo:</label>
+      <input type="text" id="imagem" name="imagem" placeholder="aniversario.jpg, pascoa.jpg ou natal.jpg">
+    </form>
+    
+  </div>
+  <div id="card"></div>
+
+  <script>
+    const form = document.getElementById('editor');
+    const card = document.getElementById('card');
+
+    form.addEventListener('input', updateCard);
+
+    function updateCard() {
+      const corFundo = form.corFundo.value;
+      const corTexto = form.corTexto.value;
+      const mensagem = form.mensagem.value;
+      const imagem = form.imagem.value;
+
+      card.style.backgroundColor = corFundo;
+      card.style.color = corTexto;
+      card.innerHTML = `<p>${mensagem}</p>`;
+      if (imagem) {
+        card.style.backgroundImage = `url('${imagem}')`;
+        card.style.backgroundSize = 'cover';
+        card.style.backgroundPosition = 'center';
+      } else {
+        card.style.backgroundImage = 'none';
+      }
+    }
+
+    updateCard();
+  </script>
+</body>
+</html>
